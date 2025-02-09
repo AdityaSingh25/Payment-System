@@ -107,9 +107,10 @@ Router.put("/", authMiddleware, async (req, res) => {
 });
 
 Router.get("/bulk", authMiddleware, async (req, res) => {
-  const filter = req.query.filter || "";
+  const filter = req.query.filter || ""; // this "" is imp
 
   const users = await User.find({
+    // way to write 2 queries at a same time
     $or: [
       {
         firstName: {
@@ -129,6 +130,7 @@ Router.get("/bulk", authMiddleware, async (req, res) => {
       username: x.username,
       firstName: x.firstName,
       lastName: x.lastName,
+      _id: x._id,
     })),
   });
 });
