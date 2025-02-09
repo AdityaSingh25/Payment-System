@@ -19,5 +19,5 @@ app.use("/api/v1", mainRouter);
 // /api/v1/account/balance
 
 app.listen(PORT, () => {
-  console.log("Port Started");
+  console.log("Server Started at port " + PORT);
 });
