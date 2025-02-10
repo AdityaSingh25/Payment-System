@@ -39,6 +39,11 @@ Router.post("/signup", async (req, res) => {
   const user = await User.create(req.body);
   const userId = user._id;
 
+  const account = await Account.create({
+    userId,
+    balance: 1 + Math.random() * 10000,
+  });
+
   const token = jwt.sign({ userId }, JWT_SECRET); //The jwt.sign method expects the payload to be an object. You were passing userId directly, which might cause issues. Instead, pass an object like { userId }.
 
   res.json({
@@ -98,7 +103,7 @@ Router.put("/", authMiddleware, async (req, res) => {
       message: "Error while updating information",
     });
   }
-  console.log(req.userID);
+  //console.log(req.userID);
 
   await User.updateOne({ _id: req.userID }, req.body);
   res.json({
