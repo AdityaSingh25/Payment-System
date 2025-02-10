@@ -24,6 +24,7 @@ Router.post("/transfer", authMiddleware, async (req, res) => {
   console.log("check 1");
 
   if (account.balance < amount) {
+    await session.abortTransaction();
     res.statusMessage(400).json({
       message: "Insufficient funds",
     });
@@ -33,7 +34,9 @@ Router.post("/transfer", authMiddleware, async (req, res) => {
   const toAccount = Account.findOne({
     userId: to,
   }).session(session);
+
   if (!toAccount) {
+    await session.abortTransaction();
     res.json({
       message: "Invalid account",
     });
