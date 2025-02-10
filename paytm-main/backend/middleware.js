@@ -20,7 +20,7 @@ const authMiddleware = (req, res, next) => {
     //console.log(decoded);
 
     if (decoded.userID) {
-      req.userID = decoded.userID; // adding userID to token
+      req.userID = decoded.userID; // adding userID to request object
     }
 
     next();

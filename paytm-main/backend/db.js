@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const accountSchema = new mongoose.Schema({
-  User: {
+  userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     required: true,
@@ -42,6 +42,7 @@ const accountSchema = new mongoose.Schema({
     required: true,
   },
 });
+
 
 const User = mongoose.model("User", UserSchema);
 const Account = mongoose.model("Account", accountSchema);
