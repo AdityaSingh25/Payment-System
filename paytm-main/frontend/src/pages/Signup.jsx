@@ -48,14 +48,26 @@ export default function Signup() {
           />
           <div className="pt-4">
             <Button
-              onPress={() => {
-                axios.post("http://localhost:3000/api/v1/user/signup"),
-                  {
-                    username,
-                    password,
-                    firstName,
-                    lastName,
-                  };
+              onPress={async () => {
+                try {
+                  const response = await axios.post(
+                    "http://localhost:3000/api/v1/user/signup",
+                    {
+                      username: username,
+                      password: password,
+                      firstName: firstName,
+                      lastName: lastName,
+                    }
+                  );
+                  console.log(response); // now we need to store the token in localStorage. as in future req that user will send we need to send token along with it.response.data.token
+
+                  localStorage.setItem("token", response.data.token); // storing the token in local storage
+                  // so when user will logout just clear the stored token -> localStorage.removeItem("token")
+                } catch (error) {
+                  console.log(
+                    error.response ? error.response.data : error.message
+                  );
+                }
               }}
               label={"Sign up"}
             />

@@ -18,7 +18,7 @@ Router.post("/signup", async (req, res) => {
   
   if (!success) {
     return res.json({
-      message: "Email already taken / Incorrect Inputs",
+      message: "Incorrect Inputs",
     });
   }
   //console.log("check 1 ");
