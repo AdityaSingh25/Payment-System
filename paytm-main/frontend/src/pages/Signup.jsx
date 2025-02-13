@@ -5,13 +5,14 @@ import InputBox from "../components/InputBox";
 import SubHeading from "../components/SubHeading";
 import { Button } from "../components/Button";
 import { BottomWarning } from "../components/BottomWarning";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
   return (
     <div className="bg-slate-300 h-screen flex justify-center">
       <div className="flex flex-col justify-center">
@@ -63,6 +64,7 @@ export default function Signup() {
 
                   localStorage.setItem("token", response.data.token); // storing the token in local storage
                   // so when user will logout just clear the stored token -> localStorage.removeItem("token")
+                  navigate("/dashboard");
                 } catch (error) {
                   console.log(
                     error.response ? error.response.data : error.message
